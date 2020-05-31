@@ -54,6 +54,9 @@ pub enum Target {
     /// in a browser but pollutes the global namespace and must be manually
     /// instantiated.
     NoModules,
+    /// Correspond to `--target web-bundler` where the output is natively usable
+    /// in a browser but must be manually instantiated.
+    WebBundler
 }
 
 impl Default for Target {
@@ -69,6 +72,7 @@ impl fmt::Display for Target {
             Target::Web => "web",
             Target::Nodejs => "nodejs",
             Target::NoModules => "no-modules",
+            Target::WebBundler => "web-bundler"
         };
         write!(f, "{}", s)
     }
@@ -82,6 +86,7 @@ impl FromStr for Target {
             "web" => Ok(Target::Web),
             "nodejs" => Ok(Target::Nodejs),
             "no-modules" => Ok(Target::NoModules),
+            "web-bundler" => Ok(Target::WebBundler),
             _ => bail!("Unknown target: {}", s),
         }
     }
